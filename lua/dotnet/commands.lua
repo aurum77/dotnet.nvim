@@ -2,6 +2,7 @@ local M = {}
 
 local Job = require "plenary.job"
 local utils = require "dotnet.utils"
+local templates = require "dotnet.templates".get_templates()
 
 -- DotnetNew
 function M.dotnet_new()
