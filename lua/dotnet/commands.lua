@@ -48,7 +48,7 @@ function M.dotnet_new()
             end,
           }
 
-          if utils.pwd_contains_pattern "./*.sln" then
+          if utils.cwd_contains_pattern "./*.sln" then
             create_new_project_job:and_then(add_to_solution)
             create_new_project_job:sync()
             return
