@@ -31,7 +31,7 @@ function M.dotnet_new()
               end,
             }
 
-            if utils.pwd_contains_sln() then
+            if utils.pwd_contains_pattern("./*.sln") then
               local add_to_solution = Job:new {
                 command = "dotnet",
                 args = { "sln", "add", project_name },

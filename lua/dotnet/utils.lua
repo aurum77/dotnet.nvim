@@ -11,11 +11,11 @@ function M.tbl_contains_regex(t, pattern)
   return false
 end
 
-function M.pwd_contains_sln()
+function M.pwd_contains_pattern(pattern)
   local scan = require "plenary.scandir"
   local dir = scan.scan_dir(".", { hidden = true, depth = 1 })
 
-  local result = M.tbl_contains_regex(dir, "./*.sln")
+  local result = M.tbl_contains_regex(dir, pattern)
 
   return result
 end
