@@ -32,6 +32,7 @@ function M.is_directory(path)
     return false
   end
 end
+
 function M.get_node_namespace()
   local node = nvim_tree_api.tree.get_node_under_cursor()
   local cwd = vim.fn.getcwd()

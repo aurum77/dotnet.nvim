@@ -5,6 +5,7 @@ end
 vim.g.loaded_dotnet = 1
 
 local commands = require "dotnet.commands"
+local nvim_tree = require "dotnet.nvim-tree"
 local api = vim.api
 
 local command = function(name, callback, opts)
@@ -12,3 +13,5 @@ local command = function(name, callback, opts)
 end
 
 command("DotnetNew", commands.dotnet_new)
+
+nvim_tree.setup_nvim_tree()
