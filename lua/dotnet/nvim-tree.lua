@@ -24,27 +24,28 @@ function M.setup_nvim_tree()
       -- Class file
       io.write(
         "using System;\n"
-          .. "using System.Collections.Generic;\n"
-          .. "using System.Linq;\n"
-          .. "using System.Text;"
-          .. "\n"
-          .. "using System.Threading.Tasks;\n\n"
-          .. "namespace "
-          .. namespace
-          .. "\n"
-          .. "{\n"
-          .. "    public "
-          .. file_type
-          .. " "
-          .. file_name
-          .. "\n"
-          .. "    {\n"
-          .. "        \n"
-          .. "    }\n"
-          .. "}"
+        .. "using System.Collections.Generic;\n"
+        .. "using System.Linq;\n"
+        .. "using System.Text;"
+        .. "\n"
+        .. "using System.Threading.Tasks;\n\n"
+        .. "namespace "
+        .. namespace
+        .. "\n"
+        .. "{\n"
+        .. "    public "
+        .. file_type
+        .. " "
+        .. file_name
+        .. "\n"
+        .. "    {\n"
+        .. "        \n"
+        .. "    }\n"
+        .. "}"
       )
       io.close(cs_file)
     end
   end)
 end
+
 return M
