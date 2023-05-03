@@ -9,6 +9,7 @@ local notify = require "dotnet.notify"
 function M.dotnet_new()
   local template_id
   local project_name
+  local folder
 
   local create_new_solution_job = Job:new {
     command = "dotnet",
@@ -36,9 +37,11 @@ function M.dotnet_new()
         if input then
           project_name = input
           template_id = choice.id
+          folder = utils.get_node_folder()
 
           local create_new_project_job = Job:new {
             command = "dotnet",
+            cwd = folder,
             args = { "new", template_id, "-n", project_name },
             on_exit = function(j, return_val)
               notify.write(j:result())
@@ -47,7 +50,7 @@ function M.dotnet_new()
 
           local add_to_solution_job = Job:new {
             command = "dotnet",
-            args = { "sln", "add", project_name },
+            args = { "sln", "add", folder .. project_name },
             on_exit = function(j, return_val)
               notify.write(j:result())
             end,

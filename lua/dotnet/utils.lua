@@ -77,4 +77,14 @@ function M.get_node_namespace()
   end
 end
 
+function M.get_node_folder()
+  local node = nvim_tree_api.tree.get_node_under_cursor()
+
+  if M.is_directory(node.absolute_path) then
+    return node.absolute_path .. "/"
+  else
+    return node.parent.absolute_path .. "/"
+  end
+end
+
 return M
