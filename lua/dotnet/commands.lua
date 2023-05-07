@@ -6,7 +6,7 @@ local templates = require("dotnet.templates").get_templates()
 local notify = require "dotnet.notify"
 
 -- DotnetNew
-function M.dotnet_new()
+function M.dotnet_project()
   local template_id
   local project_name
   local folder
