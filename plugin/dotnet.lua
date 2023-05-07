@@ -6,6 +6,7 @@ vim.g.loaded_dotnet = 1
 
 local commands = require "dotnet.commands"
 local nvim_tree = require "dotnet.nvim-tree"
+local autocmds = require "dotnet.autocmds"
 local api = vim.api
 
 local command = function(name, callback, opts)
@@ -14,4 +15,5 @@ end
 
 command("DotnetProject", commands.dotnet_project)
 
+autocmds.register_autocmds()
 nvim_tree.setup_nvim_tree()
