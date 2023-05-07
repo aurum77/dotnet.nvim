@@ -58,7 +58,6 @@ function M.get_node_namespace()
       end
 
       if node.absolute_path == cwd then
-        notify.write("Failed to find parent project", notify.ERROR)
         return cwd
       end
 
