@@ -29,10 +29,8 @@ function M.setup_nvim_tree()
       io.write(
         "using System;\n"
           .. "using System.Collections.Generic;\n"
-          .. "using System.Linq;\n"
           .. "using System.Text;"
           .. "\n"
-          .. "using System.Threading.Tasks;\n\n"
           .. "namespace "
           .. namespace
           .. "\n"
