@@ -58,11 +58,11 @@ function M.dotnet_project()
 
           if utils.cwd_contains_pattern "./*.sln" then
             create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync()
+            create_new_project_job:sync(10)
           else
             create_new_solution_job:sync()
             create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync()
+            create_new_project_job:sync(10)
           end
         end
       end)
