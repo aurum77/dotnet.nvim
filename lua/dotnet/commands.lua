@@ -2,7 +2,7 @@ local M = {}
 
 local Job = require "plenary.job"
 local utils = require "dotnet.utils"
-local templates = require("dotnet.templates").get_templates()
+local constants = require "dotnet.constants"
 local notify = require "dotnet.notify"
 
 -- DotnetNew
@@ -19,7 +19,7 @@ function M.dotnet_project()
     end,
   }
 
-  vim.ui.select(templates, {
+  vim.ui.select(constants.get_templates(), {
     prompt = "Choose a template:",
     format_item = function(item)
       return item.name
@@ -58,11 +58,11 @@ function M.dotnet_project()
 
           if utils.cwd_contains_pattern "./*.sln" then
             create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync(10)
+            create_new_project_job:sync(constants.timeout)
           else
             create_new_solution_job:sync()
             create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync(10)
+            create_new_project_job:sync(constants.timeout)
           end
         end
       end)
