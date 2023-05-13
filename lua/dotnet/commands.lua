@@ -19,7 +19,7 @@ function M.dotnet_project()
     end,
   }
 
-  vim.ui.select(constants.get_templates(), {
+  vim.ui.select(constants.templates, {
     prompt = "Choose a template:",
     format_item = function(item)
       return item.name
