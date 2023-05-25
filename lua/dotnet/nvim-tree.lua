@@ -17,10 +17,8 @@ function M.setup_nvim_tree()
 
     if file_path:sub(-3) == ".cs" then
       if file_name:sub(1, 1) == "I" and file_name:sub(1, 2) == file_name:sub(1, 2):upper() then
-        vim.notify "interface"
         file_type = "interface"
       else
-        vim.notify "class"
         file_type = "class"
       end
       local cs_file = io.open(file_path, "a")
