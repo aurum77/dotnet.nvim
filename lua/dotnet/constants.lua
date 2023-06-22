@@ -41,6 +41,13 @@ M.templates = {
   { name = "xUnit Test Project",                           id = "xunit" },
 }
 
-return m
+-- stylua: ignore
+---@type template[]
+M.management = {
+  { name = "Create new Solution",              id = "new_sln" },
+  { name = "Add new Project",                  id = "new_project" },
+  { name = "Add Project to Project Reference", id = "add_reference" },
+  { name = "Add Package",                      id = "add_package" },
+}
 
 return M

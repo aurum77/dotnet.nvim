@@ -10,6 +10,7 @@ local M = {
 function M.write(msg, level, opts)
   opts = opts or {}
   level = level or M.INFO
+  -- stylua: ignore
   if msg == "" then return end
   vim.notify(msg, level, {
     title = "dotnet.nvim",

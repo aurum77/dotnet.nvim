@@ -14,6 +14,7 @@ local command = function(name, callback, opts)
 end
 
 command("DotnetProject", commands.dotnet_project)
+command("DotnetManage", commands.dotnet_manage)
 
 autocmds.register_autocmds()
 nvim_tree.setup_nvim_tree()

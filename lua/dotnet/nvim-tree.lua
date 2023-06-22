@@ -5,6 +5,11 @@ local nvim_tree_api = require "nvim-tree.api"
 local Event = nvim_tree_api.events.Event
 
 function M.setup_nvim_tree()
+  M.file_creation_hook()
+  M.file_rename_and_move_hook()
+end
+
+function M.file_creation_hook()
   nvim_tree_api.events.subscribe(Event.FileCreated, function(data)
     local file_path = data.fname
     local file_type
@@ -27,7 +32,9 @@ function M.setup_nvim_tree()
       io.write(
         "using System;\n"
           .. "using System.Collections.Generic;\n"
-          .. "using System.Text;"
+          .. "using System.Linq;\n"
+          .. "using System.Text;\n"
+          .. "using System.Threading.Tasks;\n"
           .. "\n"
           .. "namespace "
           .. namespace
@@ -48,4 +55,10 @@ function M.setup_nvim_tree()
   end)
 end
 
+function M.file_rename_and_move_hook()
+  nvim_tree_api.events.subscribe(Event.NodeRenamed, function(data)
+    -- vim.notify(data.old_name)
+    -- vim.notify(data.new_name)
+  end)
+end
 return M

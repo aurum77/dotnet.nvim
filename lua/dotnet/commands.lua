@@ -5,6 +5,16 @@ local utils = require "dotnet.utils"
 local constants = require "dotnet.constants"
 local notify = require "dotnet.notify"
 
+function M.dotnet_manage()
+  vim.ui.select(constants.management, {
+    prompt = "Choose action:",
+  }, function(choice)
+    if choice then
+      notify.write(choice)
+    end
+  end)
+end
+
 -- DotnetNew
 function M.dotnet_project()
   local template_id
