@@ -72,6 +72,60 @@ function M.get_node_namespace()
   end
 end
 
+function M.get_parent_directory(path)
+  local directory
+  local split = path:match "/[^/]*$"
+
+  if split ~= nil then
+    directory = path:gsub(split, "")
+  end
+
+  return directory
+end
+
+function M.get_file_path_namespace(file_path)
+  local path = file_path
+  local path_tmp
+  local cwd = vim.fn.getcwd()
+  local project
+  local project_parent
+  local dir
+
+  path = M.get_parent_directory(path)
+  path_tmp = path
+
+  -- Get project path
+  if file_path ~= nil then
+    while true do
+      dir = scan.scan_dir(path, { hidden = true, depth = 1 })
+
+      if M.tbl_contains_pattern(dir, ".*.csproj") then
+        project = path
+        break
+      end
+
+      if path == cwd then
+        return cwd
+      end
+
+      path = M.get_parent_directory(path)
+    end
+
+    if project and path_tmp then
+      project_parent = M.get_parent_directory(project)
+
+      print(path_tmp:gsub(project_parent, ""):sub(2):gsub("/", "."))
+      return path_tmp:gsub(project_parent, ""):sub(2):gsub("/", ".")
+    else
+      notify.write("Failed to find parent project", notify.ERROR)
+      return cwd
+    end
+  else
+    notify.write("Failed to find parent project", notify.ERROR)
+    return cwd
+  end
+end
+
 function M.get_node_folder()
   local node = nvim_tree_api.tree.get_node_under_cursor()
 

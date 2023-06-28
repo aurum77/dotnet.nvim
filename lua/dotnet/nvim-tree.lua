@@ -14,7 +14,7 @@ function M.file_creation_hook()
     local file_path = data.fname
     local file_type
     local file_name
-    local namespace = utils.get_node_namespace()
+    local namespace = utils.get_file_path_namespace(file_path)
 
     if file_path:match "[^/]*.cs$" ~= nil then
       file_name = file_path:match("[^/]*.cs$"):gsub(".cs", "")
