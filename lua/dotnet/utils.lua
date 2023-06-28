@@ -39,9 +39,7 @@ function M.get_node_namespace()
   local project
   local dir
 
-  if M.is_directory(node.absolute_path) then
-    node = node
-  else
+  if not M.is_directory(node.absolute_path) then
     node = node.parent
   end
 
