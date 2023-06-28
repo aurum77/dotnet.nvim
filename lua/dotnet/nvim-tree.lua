@@ -21,11 +21,12 @@ function M.file_creation_hook()
     end
 
     if file_path:sub(-3) == ".cs" then
-      if file_name:sub(1, 1) == "I" and file_name:sub(1, 2) == file_name:sub(1, 2):upper() then
+      if file_name:sub(1, 1) == "I" and string.match(file_name:sub(2, 2), "%u") ~= nil then
         file_type = "interface"
       else
         file_type = "class"
       end
+
       local cs_file = io.open(file_path, "a")
       io.output(cs_file)
       -- Class file
