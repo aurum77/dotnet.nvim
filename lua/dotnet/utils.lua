@@ -4,8 +4,6 @@ local scan = require "plenary.scandir"
 local notify = require "dotnet.notify"
 local nvim_tree_api = require "nvim-tree.api"
 
-local fn = vim.fn
-
 function M.tbl_contains_pattern(t, pattern)
   vim.validate { t = { t, "t" } }
 
