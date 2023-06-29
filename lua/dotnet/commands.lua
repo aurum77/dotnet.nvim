@@ -37,7 +37,7 @@ function M.dotnet_project()
   }, function(choice)
     if choice then
       if choice.id == "solution" then
-        create_new_solution_job:sync()
+        create_new_solution_job:sync(constants.timeout)
         return
       end
 
