@@ -1,6 +1,6 @@
 local M = {}
 
----@class template
+---@class choice
 ---@type string name
 ---@type string id
 
@@ -8,7 +8,7 @@ local M = {}
 M.timeout = 10000
 
 -- stylua: ignore
----@type template[]
+---@type choice[]
 M.templates = {
   { name = "ASP.NET Core Empty",                           id = "web" },
   { name = "ASP.NET Core gRPC Service",                    id = "grpc" },
@@ -42,12 +42,14 @@ M.templates = {
 }
 
 -- stylua: ignore
----@type template[]
+---@type choice[]
 M.management = {
-  { name = "Create new Solution",              id = "new_sln" },
-  { name = "Add new Project",                  id = "new_project" },
-  { name = "Add Project to Project Reference", id = "add_reference" },
-  { name = "Add Package",                      id = "add_package" },
+  { name = "Create new Solution",                         id = "new_sln" },
+  { name = "Create new Project",                          id = "new_project" },
+  { name = "Add Reference to Project",                    id = "add_reference" },
+  { name = "Remove Reference to Project",                 id = "remove_reference" },
+  { name = "Add Package to Project",                      id = "add_package" },
+  { name = "Remove Package to Project",                   id = "remove_package" },
 }
 
 return M

@@ -13,14 +13,15 @@ if vim.g.loaded_dotnet == 1 then
   return
 end
 
-function M.setup()
-  vim.g.loaded_dotnet = 1
-
+function M.start()
+  nvim_tree.setup_nvim_tree()
   command("DotnetProject", commands.dotnet_project)
   command("DotnetManage", commands.dotnet_manage)
+end
 
+function M.setup()
+  vim.g.loaded_dotnet = 1
   autocmds.register_autocmds()
-  nvim_tree.setup_nvim_tree()
 end
 
 return M
