@@ -114,7 +114,6 @@ function M.get_file_path_namespace(file_path)
     if project and path_tmp then
       project_parent = M.get_parent_directory(project)
 
-      print(path_tmp:gsub(project_parent, ""):sub(2):gsub("/", "."))
       return path_tmp:gsub(project_parent, ""):sub(2):gsub("/", ".")
     else
       notify.write("Failed to find parent project", notify.ERROR)
