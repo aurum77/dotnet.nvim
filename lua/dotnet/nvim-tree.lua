@@ -6,7 +6,6 @@ local Event = nvim_tree_api.events.Event
 
 function M.setup_nvim_tree()
   M.file_creation_hook()
-  M.file_rename_and_move_hook()
 end
 
 function M.file_creation_hook()
