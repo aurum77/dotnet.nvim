@@ -31,35 +31,23 @@ function M.file_creation_hook()
       io.output(cs_file)
       -- Class file
       io.write(
-        "using System;\n"
-          .. "using System.Collections.Generic;\n"
-          .. "using System.Linq;\n"
-          .. "using System.Text;\n"
-          .. "using System.Threading.Tasks;\n"
-          .. "\n"
-          .. "namespace "
+        "namespace "
           .. namespace
+          .. ";"
           .. "\n"
-          .. "{\n"
-          .. "    public "
+          .. "\n"
+          .. "public "
           .. file_type
           .. " "
           .. file_name
           .. "\n"
-          .. "    {\n"
-          .. "        \n"
-          .. "    }\n"
-          .. "}"
+          .. "{\n"
+          .. "    \n"
+          .. "}\n"
       )
       io.close(cs_file)
     end
   end)
 end
 
-function M.file_rename_and_move_hook()
-  nvim_tree_api.events.subscribe(Event.NodeRenamed, function(data)
-    -- vim.notify(data.old_name)
-    -- vim.notify(data.new_name)
-  end)
-end
 return M
