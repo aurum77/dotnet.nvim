@@ -10,7 +10,6 @@ end
 
 function M.setup()
   nvim_tree.setup_nvim_tree()
-  command("DotnetProject", commands.dotnet_project)
   command("DotnetManage", commands.dotnet_manage)
 end
 
