@@ -44,12 +44,12 @@ M.templates = {
 -- stylua: ignore
 ---@type choice[]
 M.management = {
-  { name = "Create new Solution",                          id = "new_sln" },
-  { name = "Create new Project",                           id = "new_project" },
+  { name = "Add Project (on selected node)",               id = "add_project" },
   { name = "Add Reference to Project",                     id = "add_reference" },
-  { name = "Remove Reference to Project",                  id = "remove_reference" },
   { name = "Add Package to Project",                       id = "add_package" },
+  { name = "Remove Project",                               id = "remove_project" },
   { name = "Remove Package to Project",                    id = "remove_package" },
+  { name = "Remove Reference to Project",                  id = "remove_reference" },
 }
 
 return M
