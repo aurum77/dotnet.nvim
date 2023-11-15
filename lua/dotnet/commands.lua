@@ -24,6 +24,9 @@ function M.dotnet_manage()
       elseif choice.id == "set_debug_project" then
         actions.set_debug_project()
         return
+      elseif choice.id == "remove_project" then
+        actions.remove_project()
+        return
       end
     end
   end)

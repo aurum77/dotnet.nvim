@@ -107,4 +107,20 @@ function M.set_debug_project()
   end)
 end
 
+function M.remove_project()
+  local csproj_paths = utils.get_projects()
+  local split
+
+  vim.ui.select(csproj_paths, {
+    format_item = function(item)
+      split = vim.fn.split(item, "/")
+      return split[#split]
+    end,
+  }, function(choice)
+    if choice then
+      jobs.remove_from_solution(choice)
+    end
+  end)
+end
+
 return M
