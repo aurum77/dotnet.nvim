@@ -135,4 +135,34 @@ function M.get_node_folder()
   end
 end
 
+function M.get_element_index(table, element)
+  for key, value in pairs(table) do
+    if value == element then
+      return key
+    end
+  end
+end
+
+function M.get_debug_dlls()
+  local dll_paths = {}
+
+  local csproj_paths = scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*.csproj$" })
+  local split
+  local unpacked
+  for key, value in pairs(csproj_paths) do
+    split = vim.fn.split(value, "/")
+    split[#split] = split[#split]:gsub(".csproj", ".dll")
+    unpacked = unpack(scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*/.*/bin/Debug/.*/" .. split[#split] }))
+    table.insert(dll_paths, unpacked)
+  end
+
+  return dll_paths
+end
+
+function M.get_projects()
+  local csproj_paths = scan.scan_dir(vim.fn.getcwd(), { search_pattern = ".*.csproj$" })
+
+  return csproj_paths
+end
+
 return M
