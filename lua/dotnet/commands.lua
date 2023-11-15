@@ -1,25 +1,12 @@
 local M = {}
 
-local Job = require "plenary.job"
 local constants = require "dotnet.constants"
 local notify = require "dotnet.notify"
 local actions = require "dotnet.actions"
+local jobs = require "dotnet.jobs"
 
 function M.dotnet_manage()
-  local projects
-
-  local get_projects_job = Job:new {
-    command = "dotnet",
-    args = { "sln", "list" },
-    on_exit = function(j, return_val)
-      projects = j:result()
-    end,
-  }
-
-  get_projects_job:sync(constants.timeout)
-
-  table.remove(projects, 1)
-  table.remove(projects, 1)
+  local projects = jobs.get_projects()
 
   vim.ui.select(constants.management, {
     prompt = "Choose Action:",
@@ -31,15 +18,10 @@ function M.dotnet_manage()
       if choice.id == "add_project" then
         actions.add_project()
         return
+      elseif choice.id == "add_reference" then
+        actions.add_reference()
+        return
       end
-      notify.write(choice.name)
-      vim.ui.select(projects, {
-        prompt = "Choose Project:",
-      }, function(choice)
-        if choice then
-          notify.write(choice)
-        end
-      end)
     end
   end)
 end

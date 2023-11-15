@@ -60,4 +60,31 @@ function M.add_project()
   end)
 end
 
+function M.add_reference()
+  local projects = jobs.get_projects()
+  local to
+  local of
+
+  vim.ui.select(projects, {
+    prompt = "Add reference to:",
+  }, function(choice)
+    if choice then
+      local chosen_project_index = utils.get_element_index(projects, choice)
+      to = choice
+
+      table.remove(projects, chosen_project_index)
+
+      vim.ui.select(projects, {
+        prompt = "Add reference of:",
+      }, function(choice)
+        if choice then
+          of = choice
+
+          jobs.add_reference(to, of)
+        end
+      end)
+    end
+  end)
+end
+
 return M
