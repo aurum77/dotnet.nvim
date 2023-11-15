@@ -4,6 +4,8 @@ local Job = require "plenary.job"
 local utils = require "dotnet.utils"
 local constants = require "dotnet.constants"
 local notify = require "dotnet.notify"
+local jobs = require "dotnet.jobs"
+local globals = require "dotnet.globals"
 
 function M.add_project()
   local template_id
@@ -38,15 +40,6 @@ function M.add_project()
           template_id = choice.id
           folder = utils.get_node_folder()
 
-          local create_new_project_job = Job:new {
-            command = "dotnet",
-            cwd = folder,
-            args = { "new", template_id, "-n", project_name },
-            on_exit = function(j, return_val)
-              notify.write(j:result())
-            end,
-          }
-
           local add_to_solution_job = Job:new {
             command = "dotnet",
             args = { "sln", "add", folder .. project_name },
@@ -56,12 +49,10 @@ function M.add_project()
           }
 
           if utils.cwd_contains_pattern "./*.sln" then
-            create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync(constants.timeout)
+            jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
           else
             create_new_solution_job:sync()
-            create_new_project_job:and_then(add_to_solution_job)
-            create_new_project_job:sync(constants.timeout)
+            jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
           end
         end
       end)
