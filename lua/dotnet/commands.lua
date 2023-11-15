@@ -21,6 +21,9 @@ function M.dotnet_manage()
       elseif choice.id == "add_reference" then
         actions.add_reference()
         return
+      elseif choice.id == "set_debug_project" then
+        actions.set_debug_project()
+        return
       end
     end
   end)

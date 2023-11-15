@@ -87,4 +87,24 @@ function M.add_reference()
   end)
 end
 
+function M.set_debug_project()
+  local dlls = utils.get_debug_dlls()
+  local split
+
+  vim.ui.select(dlls, {
+    prompt = "Choose DLL:",
+    format_item = function(item)
+      split = vim.fn.split(item, "/")
+      return split[#split]
+    end,
+  }, function(choice)
+    if choice then
+      globals.DEBUG_PROJECT = choice
+      notify.write("Debug Project is set to: " .. globals.DEBUG_PROJECT)
+    else
+      notify.write "No Debug Projects picked"
+    end
+  end)
+end
+
 return M
