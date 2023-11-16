@@ -123,4 +123,32 @@ function M.remove_project()
   end)
 end
 
+function M.remove_reference()
+  local csproj_paths = utils.get_projects()
+  local split
+  local references
+
+  vim.ui.select(csproj_paths, {
+    format_item = function(item)
+      split = vim.fn.split(item, "/")
+      return split[#split]
+    end,
+  }, function(from)
+    if from then
+      references = jobs.get_references(from)
+      if #references == 0 then
+        notify.write("No references found in project " .. from)
+        return
+      end
+
+      vim.ui.select(references, {}, function(of)
+        if of then
+          jobs.remove_reference(from, of)
+        end
+      end
+)
+    end
+  end)
+end
+
 return M

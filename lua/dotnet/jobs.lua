@@ -86,4 +86,51 @@ function M.remove_from_solution(csproj_path)
   remove_project_job:sync(constants.timeout)
 end
 
+function M.remove_reference(from, of)
+  local split = vim.fn.split(from, "/")
+  table.remove(split, #split)
+
+  local cwd = table.concat(split, "/")
+  cwd = "/" .. cwd
+
+  local remove_reference_job = Job:new {
+    command = "dotnet",
+    args = { "remove", from, "reference", of },
+    cwd = cwd,
+    on_exit = function(j, return_val)
+      notify.write(j:result())
+    end,
+  }
+
+  remove_reference_job:sync(constants.timeout)
+end
+
+function M.get_references(csproj)
+  local references
+
+  local get_references_job = Job:new {
+    command = "dotnet",
+    args = { "list", csproj, "reference" },
+    on_exit = function(j, return_val)
+      references = j:result()
+    end,
+  }
+
+  get_references_job:sync(constants.timeout)
+
+  -- no references found
+  if #references == 1 then
+    return {}
+  end
+
+  table.remove(references, 1)
+  table.remove(references, 1)
+
+  for key, value in pairs(references) do
+    references[key] = references[key]:gsub("\\", "/")
+  end
+
+  return references
+end
+
 return M

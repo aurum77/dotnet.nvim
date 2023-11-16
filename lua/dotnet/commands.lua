@@ -27,6 +27,9 @@ function M.dotnet_manage()
       elseif choice.id == "remove_project" then
         actions.remove_project()
         return
+      elseif choice.id == "remove_reference" then
+        actions.remove_reference()
+        return
       end
     end
   end)
