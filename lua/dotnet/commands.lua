@@ -1,13 +1,9 @@
 local M = {}
 
 local constants = require "dotnet.constants"
-local notify = require "dotnet.notify"
 local actions = require "dotnet.actions"
-local jobs = require "dotnet.jobs"
 
 function M.dotnet_manage()
-  local projects = jobs.get_projects()
-
   vim.ui.select(constants.management, {
     prompt = "Choose Action:",
     format_item = function(item)
