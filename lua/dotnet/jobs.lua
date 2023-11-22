@@ -33,7 +33,7 @@ function M.create_new_project(template_id, project_name, folder)
     end,
   }
 
-  create_new_project_job:sync(constants.timeout)
+  create_new_project_job:start()
 end
 
 function M.create_new_project_and_then(template_id, project_name, folder, and_then_job)
@@ -47,7 +47,7 @@ function M.create_new_project_and_then(template_id, project_name, folder, and_th
   }
 
   create_new_project_job:and_then(and_then_job)
-  create_new_project_job:sync(constants.timeout)
+  create_new_project_job:start()
 end
 
 function M.add_to_solution(folder, project_name)
@@ -59,7 +59,7 @@ function M.add_to_solution(folder, project_name)
     end,
   }
 
-  add_to_solution_job:sync(constants.timeout)
+  add_to_solution_job:start()
 end
 
 function M.add_reference(to, of)
@@ -71,7 +71,7 @@ function M.add_reference(to, of)
     end,
   }
 
-  add_reference_job:sync(constants.timeout)
+  add_reference_job:start()
 end
 
 function M.remove_from_solution(csproj_path)
@@ -83,7 +83,7 @@ function M.remove_from_solution(csproj_path)
     end,
   }
 
-  remove_project_job:sync(constants.timeout)
+  remove_project_job:start()
 end
 
 function M.remove_reference(from, of)
@@ -102,7 +102,7 @@ function M.remove_reference(from, of)
     end,
   }
 
-  remove_reference_job:sync(constants.timeout)
+  remove_reference_job:start()
 end
 
 function M.get_references(csproj)
