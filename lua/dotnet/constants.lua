@@ -48,8 +48,8 @@ M.management = {
   { name = "Add Reference to Project",                     id = "add_reference" },
   { name = "Add Package to Project",                       id = "add_package" },
   { name = "Remove Project from Solution",                 id = "remove_project" },
-  { name = "Remove Package to Project",                    id = "remove_package" },
-  { name = "Remove Reference to Project",                  id = "remove_reference" },
+  { name = "Remove Package from Project",                  id = "remove_package" },
+  { name = "Remove Reference from Project",                id = "remove_reference" },
   { name = "Set debug Project",                            id = "set_debug_project" },
 }
 
