@@ -17,16 +17,23 @@ function M.dotnet_manage()
       elseif choice.id == "add_reference" then
         actions.add_reference()
         return
-      elseif choice.id == "set_debug_project" then
-        actions.set_debug_project()
+      elseif choice.id == "add_to_solution" then
+        actions.remove_package()
         return
-      elseif choice.id == "remove_project" then
+      elseif choice.id == "remove_from_solution" then
         actions.remove_project()
+        return
+      elseif choice.id == "remove_package" then
+        actions.remove_package()
         return
       elseif choice.id == "remove_reference" then
         actions.remove_reference()
         return
+      elseif choice.id == "set_debug_project" then
+        actions.set_debug_project()
+        return
       end
+      return
     end
   end)
 end

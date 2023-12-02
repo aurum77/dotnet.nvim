@@ -107,7 +107,7 @@ function M.set_debug_project()
   end)
 end
 
-function M.remove_project()
+function M.remove_from_solution()
   local csproj_paths = utils.get_projects()
   local split
 
@@ -145,8 +145,7 @@ function M.remove_reference()
         if of then
           jobs.remove_reference(from, of)
         end
-      end
-)
+      end)
     end
   end)
 end
