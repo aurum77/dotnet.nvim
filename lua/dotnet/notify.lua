@@ -7,9 +7,13 @@ local M = {
   WARN = vim.log.levels.WARN,
 }
 
-function M.write(msg, level, opts)
+function M.write(tbl, level, opts)
+  local msg
   opts = opts or {}
   level = level or M.INFO
+  if type(tbl) == "table" then
+    msg = table.concat(tbl, "\n", 1, #tbl)
+  end
   -- stylua: ignore
   if msg == "" then return end
   vim.notify(msg, level, {
