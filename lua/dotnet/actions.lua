@@ -150,4 +150,12 @@ function M.remove_reference()
   end)
 end
 
+function M.remove_package()
+  notify.write({ "Not implemented" }, notify.WARN)
+end
+
+function M.add_to_solution()
+  notify.write({ "Not implemented" }, notify.WARN)
+end
+
 return M
