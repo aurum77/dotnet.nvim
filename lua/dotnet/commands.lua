@@ -18,10 +18,10 @@ function M.dotnet_manage()
         actions.add_reference()
         return
       elseif choice.id == "add_to_solution" then
-        actions.remove_package()
+        actions.add_to_solution()
         return
       elseif choice.id == "remove_from_solution" then
-        actions.remove_project()
+        actions.remove_from_solution()
         return
       elseif choice.id == "remove_package" then
         actions.remove_package()
