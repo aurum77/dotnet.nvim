@@ -52,6 +52,7 @@ M.management = {
   { name = "Remove Package from Project (todo)",                     id = "remove_package" },
   { name = "Remove Reference from Project",                          id = "remove_reference" },
   { name = "Set debug Project",                                      id = "set_debug_project" },
+  { name = "Generate GUID and copy to system register",              id = "generate_guid" },
 }
 
 return M

@@ -32,6 +32,9 @@ function M.dotnet_manage()
       elseif choice.id == "set_debug_project" then
         actions.set_debug_project()
         return
+      elseif choice.id == "generate_guid" then
+        actions.generate_guid()
+        return
       end
       return
     end

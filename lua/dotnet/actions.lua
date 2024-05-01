@@ -6,6 +6,7 @@ local constants = require "dotnet.constants"
 local notify = require "dotnet.notify"
 local jobs = require "dotnet.jobs"
 local globals = require "dotnet.globals"
+local guid = require "dotnet.guid"
 
 function M.add_project()
   local template_id
@@ -156,6 +157,10 @@ end
 
 function M.add_to_solution()
   notify.write({ "Not implemented" }, notify.WARN)
+end
+
+function M.generate_guid()
+  guid.guid()
 end
 
 return M
