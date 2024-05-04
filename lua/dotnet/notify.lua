@@ -7,9 +7,8 @@ local M = {
   WARN = vim.log.levels.WARN,
 }
 
-function M.write(tbl, level, opts)
+function M.write(tbl, level)
   local msg
-  opts = opts or {}
   level = level or M.INFO
   if type(tbl) == "table" then
     msg = table.concat(tbl, "\n", 1, #tbl)
