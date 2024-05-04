@@ -101,9 +101,9 @@ function M.set_debug_project()
   }, function(choice)
     if choice then
       globals.DEBUG_PROJECT = choice
-      notify.write("Debug Project is set to: " .. globals.DEBUG_PROJECT)
+      notify.write { "Debug Project is set to: " .. choice }
     else
-      notify.write "No Debug Projects picked"
+      notify.write { "No Debug Projects picked" }
     end
   end)
 end
