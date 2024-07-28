@@ -12,6 +12,7 @@ function M.add_project()
   local template_id
   local project_name
   local folder
+  local add_to_solution_job
 
   local create_new_solution_job = Job:new {
     command = "dotnet",
@@ -41,20 +42,34 @@ function M.add_project()
           template_id = choice.id
           folder = utils.get_node_folder()
 
-          local add_to_solution_job = Job:new {
-            command = "dotnet",
-            args = { "sln", "add", folder .. project_name },
-            on_exit = function(j, return_val)
-              notify.write(j:result())
-            end,
-          }
+          vim.ui.input({
+            prompt = "Input the virtual folder path (leave empty for default):",
+          }, function(sln_folder)
+            if input then
+              add_to_solution_job = Job:new {
+                command = "dotnet",
+                args = { "sln", "add", folder .. project_name, "--solution-folder", sln_folder },
+                on_exit = function(j, return_val)
+                  notify.write(j:result())
+                end,
+              }
+            else
+              add_to_solution_job = Job:new {
+                command = "dotnet",
+                args = { "sln", "add", folder .. project_name },
+                on_exit = function(j, return_val)
+                  notify.write(j:result())
+                end,
+              }
+            end
 
-          if utils.cwd_contains_pattern "./*.sln" then
-            jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
-          else
-            create_new_solution_job:sync()
-            jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
-          end
+            if utils.cwd_contains_pattern "./*.sln" then
+              jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
+            else
+              create_new_solution_job:sync()
+              jobs.create_new_project_and_then(template_id, project_name, folder, add_to_solution_job)
+            end
+          end)
         end
       end)
     end
@@ -100,8 +115,11 @@ function M.set_debug_project()
     end,
   }, function(choice)
     if choice then
-      globals.DEBUG_PROJECT = choice
+      split = vim.fn.split(choice, "bin/Debug/net8.0")
+      globals.DEBUG_PROJECT_DLL = choice
+      globals.STARTING_PROJECT_DIR = split[1]
       notify.write { "Debug Project is set to: " .. choice }
+      notify.write { "Starting Project Path is set to: " .. split[1] }
     else
       notify.write { "No Debug Projects picked" }
     end
